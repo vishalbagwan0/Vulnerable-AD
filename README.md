@@ -178,3 +178,14 @@ nmap <Server_IP>
 # Scan all 65535 ports on the target
 nmap -p- <Server_IP>
 ```
+![Image Description](https://github.com/vishalbagwan0/Vulnerable-AD/blob/main/Image/17.png?raw=true)
+
+# All Done! 🎉
+
+Your lab is now set up and ready to perform all the mentioned attacks. 💻🔓
+
+## Next, we will continue with some well-known attacks to explore and test in this environment. 🚀
+
+Stay connected for more updates and tutorials! 🔥📡
+
+
