@@ -46,6 +46,19 @@ The main objectives of this lab are to:
 
 ---
 
+Make sure to turn off the realtime protection and tamper protection for both your Host machine and VM
+
+Download the required tools and operating system to begin your setup:
+
+- **Windows Server 2019 ISO**  
+  [Download from Microsoft Evaluation Center](https://www.microsoft.com/en-in/evalcenter/evaluate-windows-server-2019)
+
+- **PowerView (for AD recon and abuse)**  
+[https://github.com/vishalbagwan0/Vulnerable-AD](https://github.com/vishalbagwan0/Vulnerable-AD/blob/main/PowerView.ps1)
+- **Vulnerable AD Script**  
+https://github.com/vishalbagwan0/Vulnerable-AD/blob/main/vulnadscript.ps1
+
+
 ## 🛠️ Step-by-Step Setup Guide
 
 > ⚠️ Replace `change.me` with your domain name as required.
