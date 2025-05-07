@@ -1,0 +1,157 @@
+# -------------------------
+# 🔍 BASIC ENUMERATION
+# -------------------------
+
+# List all users
+Get-DomainUser
+
+# List all groups
+Get-DomainGroup
+
+# List all organizational units
+Get-DomainOU
+
+# List all computers
+Get-DomainComputer
+
+# List all domain controllers
+Get-DomainController
+
+# Get domain policy settings
+Get-DomainPolicy
+
+# Get forest details
+Get-DomainForest
+
+# Get domain details
+Get-Domain
+
+# List all group policies
+Get-DomainGPO
+
+# List all GPOs linked to an OU
+Get-DomainOU -Properties gplink
+
+# Get all trusted domains
+Get-DomainTrust
+
+# -------------------------
+# 👥 USERS & GROUPS
+# -------------------------
+
+# Get details of a specific user
+Get-DomainUser -Identity "Administrator"
+
+# List users with SPNs (Kerberoasting)
+Get-DomainUser -SPN
+
+# Find user descriptions with potential passwords
+Get-DomainUser | Where-Object { $_.description -match "password" }
+
+# Find users not requiring Kerberos pre-auth (AS-REP Roasting)
+Get-DomainUser -PreauthNotRequired
+
+# List members of Domain Admins group
+Get-DomainGroupMember -Identity "Domain Admins"
+
+# List members of a specific group
+Get-DomainGroupMember -Identity "Enterprise Admins"
+
+# Find all groups a specific user is a member of
+Get-DomainUser -Identity "targetuser" | Get-DomainGroup
+
+# -------------------------
+# 🖥️ COMPUTER ENUMERATION
+# -------------------------
+
+# Get details of a specific computer
+Get-DomainComputer -Identity "hostname"
+
+# Get computer accounts that are not expired
+Get-DomainComputer -Unconstrained
+
+# Get all computers with unconstrained delegation
+Get-DomainComputer -TrustedToAuth
+
+# Get all computers with constrained delegation
+Get-DomainComputer -TrustedToAuthForDelegation
+
+# -------------------------
+# 📂 SHARES & SESSIONS
+# -------------------------
+
+# Find shared folders
+Find-DomainShare -CheckShareAccess
+
+# Find active sessions
+Find-DomainUserLocation -UserName "targetuser"
+
+# List local admin access
+Find-LocalAdminAccess
+
+# List logged-on users on domain computers
+Invoke-UserHunter
+
+# List all active sessions across domain computers
+Invoke-UserHunter -CheckAccess
+
+# -------------------------
+# 🔒 PERMISSIONS & ACLs
+# -------------------------
+
+# Get ACLs on user objects
+Get-ObjectAcl -SamAccountName "targetuser" -ResolveGUIDs
+
+# Get ACLs for OUs
+Get-DomainOU | Get-ObjectAcl -ResolveGUIDs
+
+# Find users/groups with DCSync rights
+Get-DomainObjectAcl -DistinguishedName "DC=change,DC=me" -ResolveGUIDs | ? { $_.ActiveDirectoryRights -match "GenericAll" }
+
+# -------------------------
+# 🧭 ADVANCED ENUMERATION
+# -------------------------
+
+# Get all computers with PS Remoting enabled
+Get-DomainComputer | ? { Test-Connection -Count 1 -ComputerName $_.Name -Quiet } | Out-GridView
+
+# Get current user details
+Get-NetUser
+
+# Get current machine details
+Get-NetComputer
+
+# Get the local admins of remote computers
+Invoke-EnumerateLocalAdmin -ComputerName "hostname"
+
+# List GPOs with password policy settings
+Get-DomainGPO | ForEach-Object { Get-DomainGPOReport -Name $_.Name -ReportType Xml }
+
+# List computers with SMB Signing disabled
+Invoke-CheckSMB
+
+# -------------------------
+# 🛡️ DEFENSE CHECKS
+# -------------------------
+
+# List AV and Defender information
+Get-WmiObject -Namespace "root\SecurityCenter2" -Class AntiVirusProduct
+
+# Check if Windows Firewall is enabled
+Get-NetFirewallProfile | Select-Object Name, Enabled
+
+# List installed updates (for patch checks)
+Get-HotFix
+
+# -------------------------
+# 📂 EXPORTING DATA
+# -------------------------
+
+# Export users to a CSV
+Get-DomainUser | Export-Csv -Path .\domain_users.csv -NoTypeInformation
+
+# Export computers to CSV
+Get-DomainComputer | Export-Csv -Path .\domain_computers.csv -NoTypeInformation
+
+# Export groups to CSV
+Get-DomainGroup | Export-Csv -Path .\domain_groups.csv -NoTypeInformation
