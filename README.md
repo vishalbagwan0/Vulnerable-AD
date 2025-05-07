@@ -110,4 +110,45 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass
 ```powershell
 Import-Module C:\User\Administartor\Desktop\vulnadscript.ps1
 ```
+---
 
+## 🧭 Windows Enumeration Using PowerView
+
+Once your vulnerable AD environment is ready, you can begin enumeration to identify misconfigurations and gather valuable recon data. PowerView is one of the most powerful tools for AD recon.
+
+---
+
+### 🔍 Step 1: Import PowerView in a PowerShell Session
+
+Open PowerShell **as Administrator** and import the PowerView script.
+
+```powershell
+Import-Module .\PowerView.ps1
+```
+📝 Make sure PowerView.ps1 is in your current directory or provide the full path to the script.
+
+### Users Enumeration
+
+- **With PowerView**:
+```powershell
+# Get the list of users
+Get-NetUser                       
+# Grab the cn (common-name) from the list of users
+Get-NetUser | select cn                           
+# Grab the name from the list of users
+Get-NetUser | select name           
+```
+### Domain Admins Enumeration
+
+- **With PowerView:**
+```powershell
+# Get the current domain
+Get-NetDomain
+# Get items from another domain
+Get-NetDomain -Domain change.me
+# Get the domain SID for the current domain
+Get-DomainSID                                         
+# Get domai n policy for current domain
+Get-DomainPolicy 
+```
+- You use the Powerview_enumeration_commands.txt for more enumeration commands
