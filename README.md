@@ -91,3 +91,23 @@ IEX((new-object net.webclient).downloadstring("https://raw.githubusercontent.com
 Invoke-VulnAD -UsersLimit 100 -DomainName "change.me"
 ```
 
+---
+
+### ✅ Step 4: Post-Restart – Bypass Policy Again
+
+After the system restarts following Active Directory installation, log in as Administrator and re-apply the PowerShell execution policy to allow script execution.
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy Bypass
+```
+---
+
+### ✅ Step 5: Import Vulnerable AD Script
+
+> Run this in **PowerShell as Administrator**.  
+> Ensure the `vulnadscript.ps1` file is in your working directory or provide the full path to the script.
+
+```powershell
+Import-Module C:\User\Administartor\Desktop\vulnadscript.ps1
+```
+
