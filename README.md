@@ -152,3 +152,13 @@ Get-DomainSID
 Get-DomainPolicy 
 ```
 - You use the Powerview_enumeration_commands.txt for more enumeration commands
+
+# We can also use Linux for enumeration
+
+Linux provides powerful tools like `nmap` to scan for open ports, detect services, and identify vulnerabilities on a target system. Below are some basic `nmap` commands that can be used for enumeration:
+
+```bash
+nmap <Server_IP>
+# Scan all 65535 ports on the target
+nmap -p- <Server_IP>
+```
