@@ -53,7 +53,7 @@ Download the required tools and operating system to begin your setup:
 - **Windows Server 2019 ISO**  
   [Download from Microsoft Evaluation Center](https://www.microsoft.com/en-in/evalcenter/evaluate-windows-server-2019)
 
-![Image Description]([https://raw.githubusercontent.com/your-username/your-repo-name/main/images/your-image.jpg(https://github.com/vishalbagwan0/Vulnerable-AD/blob/main/Image/server%20page%20iso.png?raw=true))
+![Image Description](https://github.com/vishalbagwan0/Vulnerable-AD/blob/main/Image/server%20page%20iso.png?raw=true)
 
 - **PowerView (for AD recon and abuse)**  
 [https://github.com/vishalbagwan0/Vulnerable-AD](https://github.com/vishalbagwan0/Vulnerable-AD/blob/main/PowerView.ps1)
@@ -72,6 +72,9 @@ Allows execution of scripts on the system.
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy Bypass
 ```
+
+![Image Description](https://github.com/vishalbagwan0/Vulnerable-AD/blob/main/Image/1.png?raw=true)
+
 ### ✅ Step 2: Import AD Deployment Module
 
 Loads the necessary module to install Active Directory.
@@ -93,6 +96,8 @@ IEX((new-object net.webclient).downloadstring("https://raw.githubusercontent.com
 Invoke-VulnAD -UsersLimit 100 -DomainName "change.me"
 ```
 
+![Image Description](https://github.com/vishalbagwan0/Vulnerable-AD/blob/main/Image/71.png?raw=true)
+
 ---
 
 ### ✅ Step 4: Post-Restart – Bypass Policy Again
@@ -112,6 +117,9 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass
 ```powershell
 Import-Module C:\User\Administartor\Desktop\vulnadscript.ps1
 ```
+
+![Image Description](https://github.com/vishalbagwan0/Vulnerable-AD/blob/main/Image/10.png?raw=true)
+
 ---
 
 ## 🧭 Windows Enumeration Using PowerView
@@ -125,8 +133,14 @@ Once your vulnerable AD environment is ready, you can begin enumeration to ident
 Open PowerShell **as Administrator** and import the PowerView script.
 
 ```powershell
+#import PowerView module
 Import-Module .\PowerView.ps1
+#to  Enumerate Domain users
+Get-Domainuser
 ```
+
+![Image Description](https://github.com/vishalbagwan0/Vulnerable-AD/blob/main/Image/14.png?raw=true)
+
 📝 Make sure PowerView.ps1 is in your current directory or provide the full path to the script.
 
 ### Users Enumeration
